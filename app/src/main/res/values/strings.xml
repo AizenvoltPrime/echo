@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">echo</string>
+    <string name="my_string">Hello World App in Android</string>
+    <string name="hello_world">Hello World</string>
 </resources>
