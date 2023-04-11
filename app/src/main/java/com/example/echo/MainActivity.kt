@@ -12,5 +12,6 @@ class MainActivity : AppCompatActivity() {
 
         val myTextView = findViewById<TextView>(R.id.textview)
         myTextView.text = getString(R.string.my_string)
+
     }
 }
