@@ -51,6 +51,10 @@
         android:layout_height="wrap_content" />
 
     <TextView
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
         android:id="@+id/loginNow"
         android:text="@string/click_to_login"
         android:layout_width="match_parent"

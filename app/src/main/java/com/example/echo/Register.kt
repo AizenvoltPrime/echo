@@ -1,5 +1,6 @@
 package com.example.echo
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import android.view.View
 import com.google.android.material.textfield.TextInputEditText
 import android.widget.Button
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -20,7 +22,17 @@ class Register : AppCompatActivity() {
     private lateinit var buttonReg: Button
     private lateinit var auth: FirebaseAuth
     private lateinit var progressBar: ProgressBar
+    private lateinit var textView: TextView
 
+    public override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        if(currentUser != null){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -29,7 +41,12 @@ class Register : AppCompatActivity() {
         buttonReg = findViewById(R.id.btn_register)
         progressBar = findViewById(R.id.progressBar)
         auth = FirebaseAuth.getInstance()
-
+        textView = findViewById(R.id.loginNow)
+        textView.setOnClickListener {
+            val intent = Intent(applicationContext, Login::class.java)
+            startActivity(intent)
+            finish()
+        }
         buttonReg.setOnClickListener {
             progressBar.visibility = View.VISIBLE
             val email = editTextEmail.text.toString()
@@ -59,6 +76,9 @@ class Register : AppCompatActivity() {
                     if (task.isSuccessful) {
                         Toast.makeText(this, "Account created.",
                             Toast.LENGTH_SHORT).show()
+                        val intent = Intent(applicationContext, Login::class.java)
+                        startActivity(intent)
+                        finish()
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(this, "Authentication failed.",
@@ -70,12 +90,7 @@ class Register : AppCompatActivity() {
                     Log.w(TAG, "createUserWithEmail:failure", exception)
                     Toast.makeText(this, "Authentication failed: ${exception.message}",
                         Toast.LENGTH_SHORT).show()
-                    updateUI(null)
                 }
         }
-    }
-
-    private fun updateUI(user: FirebaseUser?) {
-        // TODO: Update the user interface based on the current user
     }
 }
