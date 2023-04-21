@@ -14,6 +14,11 @@ import com.google.firebase.auth.FirebaseAuth
 
 private const val TAG = "RegisterActivity"
 
+fun isValidPassword(password: String): Boolean {
+    val passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$".toRegex()
+    return passwordRegex.matches(password)
+}
+
 class Register : AppCompatActivity() {
 
     private lateinit var editTextEmail: TextInputEditText
@@ -69,10 +74,18 @@ class Register : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            if (!isValidPassword(password)) {
+                // Password is not valid, display error message to user
+                Toast.makeText(
+                    this,
+                    "Password does not meet requirements",
+                    Toast.LENGTH_SHORT).show()
+            }
+
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     progressBar.visibility = View.GONE
-                    if (task.isSuccessful) {
+                    if (task.isSuccessful && isValidPassword(password)) {
                         Toast.makeText(this, "Account created.",
                             Toast.LENGTH_SHORT).show()
                         val intent = Intent(applicationContext, Login::class.java)
