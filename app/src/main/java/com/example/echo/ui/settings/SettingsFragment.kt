@@ -23,7 +23,7 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val slideshowViewModel =
-            ViewModelProvider(this).get(SlideshowViewModel::class.java)
+            ViewModelProvider(this).get(SettingsViewModel::class.java)
 
         _binding = FragmentAnalyticsBinding.inflate(inflater, container, false)
         val root: View = binding.root

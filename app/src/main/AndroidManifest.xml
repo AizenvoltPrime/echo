@@ -14,10 +14,10 @@
         android:theme="@style/Theme.Material3.Dark"
         tools:targetApi="31">
         <activity
-            android:name=".HomeSc"
+            android:name=".HomeScNav"
             android:exported="true"
             android:label="@string/title_activity_home_sc"
-            android:theme="@style/NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
