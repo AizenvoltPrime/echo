@@ -23,6 +23,8 @@ class Register : AppCompatActivity() {
 
     private lateinit var editTextEmail: TextInputEditText
     private lateinit var editTextPassword: TextInputEditText
+    private lateinit var editTextUsername: TextInputEditText
+    private lateinit var editTextRepeatPassword: TextInputEditText
     private lateinit var buttonReg: Button
     private lateinit var auth: FirebaseAuth
     private lateinit var progressBar: ProgressBar
@@ -37,24 +39,33 @@ class Register : AppCompatActivity() {
             finish()
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
         editTextEmail = findViewById(R.id.email)
         editTextPassword = findViewById(R.id.password)
+        editTextUsername = findViewById(R.id.username)
+        editTextRepeatPassword = findViewById(R.id.repeat_password)
         buttonReg = findViewById(R.id.btn_register)
         progressBar = findViewById(R.id.progressBar)
         auth = FirebaseAuth.getInstance()
         textView = findViewById(R.id.loginNow)
+
         textView.setOnClickListener {
             val intent = Intent(applicationContext, Login::class.java)
             startActivity(intent)
             finish()
         }
+
         buttonReg.setOnClickListener {
             progressBar.visibility = View.VISIBLE
+
             val email = editTextEmail.text.toString()
             val password = editTextPassword.text.toString()
+            val username = editTextUsername.text.toString()
+            val repeatPassword = editTextRepeatPassword.text.toString()
 
             if (email.isEmpty()) {
                 Toast.makeText(
@@ -74,23 +85,54 @@ class Register : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            if (username.isEmpty()) {
+                Toast.makeText(
+                    this,
+                    "Enter username",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
+            if (repeatPassword.isEmpty()) {
+                Toast.makeText(
+                    this,
+                    "Enter repeat password",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
             if (!isValidPassword(password)) {
                 // Password is not valid, display error message to user
                 Toast.makeText(
                     this,
                     "Password does not meet requirements",
                     Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (password != repeatPassword) {
+                // Passwords do not match, display error message to user
+                Toast.makeText(
+                    this,
+                    "Passwords do not match",
+                    Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
 
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     progressBar.visibility = View.GONE
+
                     if (task.isSuccessful && isValidPassword(password)) {
                         Toast.makeText(this, "Account created.",
                             Toast.LENGTH_SHORT).show()
+
                         val intent = Intent(applicationContext, Login::class.java)
                         startActivity(intent)
                         finish()
+
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(this, "Authentication failed.",
