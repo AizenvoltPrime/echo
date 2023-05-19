@@ -3,8 +3,9 @@
     <string name="my_string">Hello World App in Android</string>
     <string name="hello_world">Hello World</string>
     <string name="login">Login</string>
-    <string name="email">email</string>
+    <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="repeat_password">Repeat Password</string>
     <string name="register">Register</string>
     <string name="click_to_login">Click to login</string>
     <string name="click_to_register">Click to register</string>
@@ -25,4 +26,6 @@
     <string name="close">Close</string>
     <string name="echo">ECHO</string>
     <string name="nav_profile">Profile</string>
+    <string name="username">Username</string>
+    <string name="registration">Registration</string>
 </resources>
