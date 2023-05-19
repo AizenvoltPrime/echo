@@ -61,11 +61,11 @@ class Register : AppCompatActivity() {
 
         buttonReg.setOnClickListener {
             progressBar.visibility = View.VISIBLE
-
             val email = editTextEmail.text.toString()
             val password = editTextPassword.text.toString()
             val username = editTextUsername.text.toString()
             val repeatPassword = editTextRepeatPassword.text.toString()
+
 
             if (email.isEmpty()) {
                 Toast.makeText(
@@ -108,8 +108,9 @@ class Register : AppCompatActivity() {
                 Toast.makeText(
                     this,
                     "Password does not meet requirements",
-                    Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener  // Add this line to prevent further execution
             }
 
             if (password != repeatPassword) {
@@ -124,26 +125,24 @@ class Register : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     progressBar.visibility = View.GONE
-
-                    if (task.isSuccessful && isValidPassword(password)) {
-                        Toast.makeText(this, "Account created.",
-                            Toast.LENGTH_SHORT).show()
-
+                    if (task.isSuccessful) {
+                        Toast.makeText(this, "Account created.", Toast.LENGTH_SHORT).show()
                         val intent = Intent(applicationContext, Login::class.java)
                         startActivity(intent)
                         finish()
-
                     } else {
                         // If sign in fails, display a message to the user.
-                        Toast.makeText(this, "Authentication failed.",
-                            Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
                     }
                 }
                 .addOnFailureListener(this) { exception ->
                     // Handle the exception appropriately
                     Log.w(TAG, "createUserWithEmail:failure", exception)
-                    Toast.makeText(this, "Authentication failed: ${exception.message}",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "Authentication failed: ${exception.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
         }
     }
