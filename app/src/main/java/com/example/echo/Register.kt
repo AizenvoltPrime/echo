@@ -113,12 +113,15 @@ class Register : AppCompatActivity() {
                 return@setOnClickListener  // Add this line to prevent further execution
             }
 
-            if (password != repeatPassword) {
+            if (password == repeatPassword) {
+                // Passwords match, continue with registration
+            } else {
                 // Passwords do not match, display error message to user
                 Toast.makeText(
                     this,
                     "Passwords do not match",
-                    Toast.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
 
