@@ -11,20 +11,23 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import android.text.method.PasswordTransformationMethod
+import android.text.InputType
+import android.widget.EditText
 
 private const val TAG = "RegisterActivity"
 
 fun isValidPassword(password: String): Boolean {
-    val passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$".toRegex()
+    val passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$".toRegex()
     return passwordRegex.matches(password)
 }
 
 class Register : AppCompatActivity() {
 
     private lateinit var editTextEmail: TextInputEditText
-    private lateinit var editTextPassword: TextInputEditText
     private lateinit var editTextUsername: TextInputEditText
-    private lateinit var editTextRepeatPassword: TextInputEditText
+    private lateinit var editTextPassword: EditText
+    private lateinit var editTextRepeatPassword: EditText
     private lateinit var buttonReg: Button
     private lateinit var auth: FirebaseAuth
     private lateinit var progressBar: ProgressBar
@@ -148,5 +151,14 @@ class Register : AppCompatActivity() {
                     ).show()
                 }
         }
+
+        // Set input type and transformation method for password fields
+        editTextPassword.inputType =
+            InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+        editTextPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+
+        editTextRepeatPassword.inputType =
+            InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+        editTextRepeatPassword.transformationMethod = PasswordTransformationMethod.getInstance()
     }
 }
