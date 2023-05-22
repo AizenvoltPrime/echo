@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import android.text.method.PasswordTransformationMethod
 import android.text.InputType
 import android.widget.EditText
+import com.google.firebase.database.FirebaseDatabase
 
 private const val TAG = "RegisterActivity"
 
@@ -36,7 +37,7 @@ class Register : AppCompatActivity() {
     public override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
-        if(currentUser != null){
+        if (currentUser != null) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
@@ -68,7 +69,6 @@ class Register : AppCompatActivity() {
             val password = editTextPassword.text.toString()
             val username = editTextUsername.text.toString()
             val repeatPassword = editTextRepeatPassword.text.toString()
-
 
             if (email.isEmpty()) {
                 Toast.makeText(
@@ -113,7 +113,7 @@ class Register : AppCompatActivity() {
                     "Password does not meet requirements",
                     Toast.LENGTH_SHORT
                 ).show()
-                return@setOnClickListener  // Add this line to prevent further execution
+                return@setOnClickListener // Add this line to prevent further execution
             }
 
             if (password == repeatPassword) {
@@ -132,27 +132,54 @@ class Register : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     progressBar.visibility = View.GONE
                     if (task.isSuccessful) {
-                        Toast.makeText(this, "Account created.", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(applicationContext, Login::class.java)
-                        startActivity(intent)
-                        finish()
+                        // Get the current user
+                        val user = auth.currentUser
+
+                        // Get the reference to the users node in the Firebase Realtime Database using the correct database URL for your region.
+                        val database =
+                            FirebaseDatabase.getInstance("https://echo-37e0c-default-rtdb.europe-west1.firebasedatabase.app")
+                        val usersRef = database.getReference("users")
+
+                        // Create a map to store the user information.
+                        val userInfo = mapOf(
+                            "email" to email,
+                            "username" to username,
+                        )
+
+                        // Save the user information in the Firebase Realtime Database.
+                        usersRef.child(user!!.uid).setValue(userInfo)
+                            .addOnSuccessListener {
+                                Toast.makeText(this, "Account created.", Toast.LENGTH_SHORT).show()
+                                val intent = Intent(applicationContext, Login::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                            .addOnFailureListener { exception ->
+                                // Handle the exception appropriately.
+                                Log.w(TAG, "setValue:failure", exception)
+                                Toast.makeText(
+                                    this,
+                                    "Failed to save user information: ${exception.message}",
+                                    Toast.LENGTH_SHORT,
+                                ).show()
+                            }
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
                     }
                 }
                 .addOnFailureListener(this) { exception ->
-                    // Handle the exception appropriately
+                    // Handle the exception appropriately.
                     Log.w(TAG, "createUserWithEmail:failure", exception)
                     Toast.makeText(
                         this,
                         "Authentication failed: ${exception.message}",
-                        Toast.LENGTH_SHORT
+                        Toast.LENGTH_SHORT,
                     ).show()
                 }
         }
 
-        // Set input type and transformation method for password fields
+        // Set input type and transformation method for password fields.
         editTextPassword.inputType =
             InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
         editTextPassword.transformationMethod = PasswordTransformationMethod.getInstance()
