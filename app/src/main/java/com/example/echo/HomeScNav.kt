@@ -1,12 +1,16 @@
 package com.example.echo
 
-import android.os.Bundle
-import android.view.MenuItem
+import android.content.Intent
+import android.os.Bundle ;
+import android.view.MenuItem ;
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import com.google.android.material.navigation.NavigationView
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+
 
 /* TODO: Add to MainActivity
         Have menu items navigate to their respective screens
@@ -26,8 +30,12 @@ class HomeScNav : AppCompatActivity(){
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         navView.setNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.nav_logout -> Toast.makeText(applicationContext, "Logging Out...", Toast.LENGTH_SHORT).show()
+            if(it.itemId == R.id.nav_settings){
+                val intent = Intent(this, ChangeCredentials::class.java)
+                startActivity(intent)
+            }
+            else if(it.itemId == R.id.nav_logout){
+               Toast.makeText(applicationContext, "Logging Out...", Toast.LENGTH_SHORT).show()
             }
             true
         }

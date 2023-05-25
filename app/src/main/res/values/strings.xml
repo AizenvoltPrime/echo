@@ -28,4 +28,8 @@
     <string name="nav_profile">Profile</string>
     <string name="username">Username</string>
     <string name="registration">Registration</string>
+    <string name="cur_email">Current Email</string>
+    <string name="apply">Apply</string>
+    <string name="change_email">Change Email</string>
+    <string name="change_password">Change Password</string>
 </resources>
