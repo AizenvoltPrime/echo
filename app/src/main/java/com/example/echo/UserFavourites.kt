@@ -26,14 +26,14 @@ class UserFavorites(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     }
 
     /* Read DB */
-    fun getSong(): Cursor? {
+    fun getFavoriteSong(): Cursor? {
         val db = this.readableDatabase
         return db.rawQuery("SELECT * FROM " + TABLE_NAME, null)
     }
 
     /* Add songName and songInfo values into the ContentValues set,
     *  make db writeable and write the above to it. */
-    fun addSong(songName : String, songInfo : String ){
+    fun addToFavorites(songName : String, songInfo : String ){
         val db_info = ContentValues()
         db_info.put(SONG_NAME, songName)
         db_info.put(SONG_INFO, songInfo)
