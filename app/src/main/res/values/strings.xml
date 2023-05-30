@@ -32,4 +32,6 @@
     <string name="apply">Apply</string>
     <string name="change_email">Change Email</string>
     <string name="change_password">Change Password</string>
+    <string name="search_song">Search song</string>
+    <string name="search">Search</string>
 </resources>
