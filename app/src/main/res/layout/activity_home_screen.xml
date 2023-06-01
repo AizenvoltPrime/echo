@@ -5,8 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".HomeScNav">
+    tools:context=".Search">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/searchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search" />
+
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/musicIc"
@@ -43,7 +54,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText,RtlHardcoded" />
 
-
     <EditText
         android:id="@+id/search_song"
         android:layout_width="237dp"
@@ -60,6 +70,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="405dp" />
 
@@ -75,6 +86,5 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="453dp" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
