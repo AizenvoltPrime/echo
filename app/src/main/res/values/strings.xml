@@ -34,4 +34,5 @@
     <string name="change_password">Change Password</string>
     <string name="search_song">Search song</string>
     <string name="search">Search</string>
+    <string name="settings">Settings</string>
 </resources>
