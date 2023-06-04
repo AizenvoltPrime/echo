@@ -34,11 +34,11 @@
         <activity
             android:name=".Register"
             android:exported="false"
-            android:theme="@style/Theme.Echo" />
+            android:theme="@style/Theme.Material3.Dark.NoActionBar" />
         <activity
             android:name=".Login"
             android:exported="true"
-            android:theme="@style/Theme.Echo">
+            android:theme="@style/Theme.Material3.Dark.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
