@@ -11,7 +11,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Material3.Dark"
+        android:theme="@style/Theme.Echo"
         tools:targetApi="31">
         <activity
             android:name=".Search"
@@ -24,7 +24,7 @@
             android:name=".HomeScNav"
             android:exported="true"
             android:label="@string/title_activity_home_sc"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.Echo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,11 +34,11 @@
         <activity
             android:name=".Register"
             android:exported="false"
-            android:theme="@style/Theme.Material3.Dark.NoActionBar" />
+            android:theme="@style/Theme.Echo" />
         <activity
             android:name=".Login"
             android:exported="true"
-            android:theme="@style/Theme.Material3.Dark.NoActionBar">
+            android:theme="@style/Theme.Echo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,7 +47,8 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.Echo"/>
     </application>
 
 </manifest>
