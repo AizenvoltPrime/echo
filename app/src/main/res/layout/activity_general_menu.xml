@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="220dp"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/home"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/black"
+        android:drawableLeft="@drawable/ic_home"
+        android:paddingRight="70dp"
+        android:text="Home"
+        android:textColor="@color/teal_200" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/analytics"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:backgroundTint="@color/black"
+        android:layout_below="@+id/home"
+        android:drawableLeft="@drawable/ic_analytics"
+        android:text="Analytics"
+        android:paddingRight="70dp"
+        android:textColor="@color/teal_200" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/about"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_below="@+id/analytics"
+        android:backgroundTint="@color/black"
+        android:drawableLeft="@drawable/ic_info"
+        android:text="About"
+        android:paddingRight="70dp"
+        android:textColor="@color/teal_200" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/contact"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_below="@+id/about"
+        android:backgroundTint="@color/black"
+        android:drawableLeft="@drawable/ic_email"
+        android:text="Contact Us"
+        android:paddingRight="70dp"
+        android:textColor="@color/teal_200" />
+
+</RelativeLayout>

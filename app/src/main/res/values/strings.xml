@@ -17,7 +17,7 @@
     <string name="nav_header_subtitle">Welcome, [name]</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
+    <string name="empty"> </string>
     <string name="menu_home">Home</string>
     <string name="menu_analytics">Analytics</string>
     <string name="menu_settings">Settings</string>
